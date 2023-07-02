@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   # 投稿画像にコメントのため、post_commentsはpost_imagesに結びつく
   resources :post_images, only: [:new, :create, :index, :show, :destroy] do
+    resource :favorites, only: [:create, :destroy] #resourceとなっている。単数形にすると/:idがURLに含まれなくなります
     resources :post_comments, only: [:create, :destroy]
   end
 

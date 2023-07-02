@@ -10,6 +10,22 @@
   <% if @post_image.user == current_user %>
     <%= link_to "削除", post_image_path(@post_image), method: :delete %>
   <% end %>
+  <!--現在ログインしているユーザーがいいねしているかどうか-->
+  <% if @post_image.favorited_by?(current_user) %>
+    <p>
+      <!--リンクブロック内で、いいねを押している場合にdeleteメソッド-->
+      <%= link_to post_image_favorites_path(@post_image), method: :delete do %>
+        ♥<%= @post_image.favorites.count %>いいね
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <!--リンクブロック内で、いいねを押している場合にpostメソッド-->
+      <%= link_to post_image_favorites_path(@post_image), method: :post do %>
+        ♡<%= @post_image.favorites.count %>いいね
+      <% end %>
+    </p>
+  <% end %>
 </div>
 
 <div>
